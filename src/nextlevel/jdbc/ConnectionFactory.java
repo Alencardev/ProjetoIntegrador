@@ -19,7 +19,7 @@ public class ConnectionFactory {
         try {
             final String url = "jdbc:mysql://localhost:3306/NEXTLEVELBD?verifyServerCertificate=false&useSSL=true";
             final String user = "teste";
-            final String password = "9876544";
+            final String password = "987654";
             
             return DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {

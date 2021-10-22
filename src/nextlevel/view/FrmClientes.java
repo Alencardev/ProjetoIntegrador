@@ -62,8 +62,8 @@ public class FrmClientes extends javax.swing.JFrame {
         jButtonPesquisarCon = new javax.swing.JButton();
         jScrollPaneCon = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButtonSalvarCon = new javax.swing.JButton();
         jButtonNovoCon = new javax.swing.JButton();
+        jButtonSalvarCon = new javax.swing.JButton();
         jButtonEditarCon = new javax.swing.JButton();
         jButtonExcluirCon = new javax.swing.JButton();
 
@@ -351,19 +351,52 @@ public class FrmClientes extends javax.swing.JFrame {
         ));
         jScrollPaneCon.setViewportView(jTable1);
 
-        jButtonSalvarCon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonSalvarCon.setText("SALVAR");
-        jButtonSalvarCon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSalvarConActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanelConsultaClientesLayout = new javax.swing.GroupLayout(jPanelConsultaClientes);
+        jPanelConsultaClientes.setLayout(jPanelConsultaClientesLayout);
+        jPanelConsultaClientesLayout.setHorizontalGroup(
+            jPanelConsultaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelConsultaClientesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelConsultaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPaneCon)
+                    .addGroup(jPanelConsultaClientesLayout.createSequentialGroup()
+                        .addComponent(jLabelNomeCon)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldNomeCon, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonPesquisarCon)
+                        .addGap(0, 327, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanelConsultaClientesLayout.setVerticalGroup(
+            jPanelConsultaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelConsultaClientesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelConsultaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonPesquisarCon)
+                    .addGroup(jPanelConsultaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelNomeCon)
+                        .addComponent(jTextFieldNomeCon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPaneCon, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(151, Short.MAX_VALUE))
+        );
+
+        jTabbedPaneClientes.addTab("Consulta de clientes", jPanelConsultaClientes);
 
         jButtonNovoCon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonNovoCon.setText("NOVO");
         jButtonNovoCon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonNovoConActionPerformed(evt);
+            }
+        });
+
+        jButtonSalvarCon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonSalvarCon.setText("SALVAR");
+        jButtonSalvarCon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarConActionPerformed(evt);
             }
         });
 
@@ -383,55 +416,6 @@ public class FrmClientes extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanelConsultaClientesLayout = new javax.swing.GroupLayout(jPanelConsultaClientes);
-        jPanelConsultaClientes.setLayout(jPanelConsultaClientesLayout);
-        jPanelConsultaClientesLayout.setHorizontalGroup(
-            jPanelConsultaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelConsultaClientesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelConsultaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPaneCon)
-                    .addGroup(jPanelConsultaClientesLayout.createSequentialGroup()
-                        .addComponent(jLabelNomeCon)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldNomeCon, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonPesquisarCon)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jPanelConsultaClientesLayout.createSequentialGroup()
-                .addGap(253, 253, 253)
-                .addComponent(jButtonNovoCon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonSalvarCon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonEditarCon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonExcluirCon)
-                .addContainerGap(293, Short.MAX_VALUE))
-        );
-        jPanelConsultaClientesLayout.setVerticalGroup(
-            jPanelConsultaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelConsultaClientesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelConsultaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonPesquisarCon)
-                    .addGroup(jPanelConsultaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabelNomeCon)
-                        .addComponent(jTextFieldNomeCon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPaneCon, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addGroup(jPanelConsultaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSalvarCon)
-                    .addComponent(jButtonNovoCon)
-                    .addComponent(jButtonEditarCon)
-                    .addComponent(jButtonExcluirCon))
-                .addGap(58, 58, 58))
-        );
-
-        jTabbedPaneClientes.addTab("Consulta de clientes", jPanelConsultaClientes);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -441,15 +425,36 @@ public class FrmClientes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jTabbedPaneClientes)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(242, 242, 242)
+                .addComponent(jButtonNovoCon)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonSalvarCon)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonEditarCon)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonExcluirCon)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonEditarCon, jButtonExcluirCon, jButtonNovoCon, jButtonSalvarCon});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelCadastroClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPaneClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 73, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSalvarCon)
+                    .addComponent(jButtonNovoCon)
+                    .addComponent(jButtonEditarCon)
+                    .addComponent(jButtonExcluirCon))
+                .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonEditarCon, jButtonExcluirCon, jButtonNovoCon, jButtonSalvarCon});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
