@@ -81,7 +81,7 @@ public class Enderecos {
         return uf;
     }
 
-    public void setUF(String estado) {
+    public void setUF(String uf) {
         this.uf = uf;
     }
     
