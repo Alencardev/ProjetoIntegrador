@@ -18,7 +18,7 @@ public class Enderecos {
     private String complemento;
     private String bairro;
     private String cidade;
-    private String estado;
+    private String uf;
     
     //GETTERS E SETTERS
     public int getId() {
@@ -77,12 +77,12 @@ public class Enderecos {
         this.cidade = cidade;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getUF() {
+        return uf;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setUF(String estado) {
+        this.uf = uf;
     }
     
 }
