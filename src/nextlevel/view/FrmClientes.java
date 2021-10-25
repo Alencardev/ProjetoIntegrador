@@ -5,6 +5,11 @@
  */
 package nextlevel.view;
 
+import javax.swing.JOptionPane;
+import nextlevel.dao.EnderecosDAO;
+import nextlevel.model.Clientes;
+import nextlevel.model.Enderecos;
+
 /**
  *
  * @author Leonardo Drews Montibeller at ldmontibeller@gmail.com
@@ -47,7 +52,6 @@ public class FrmClientes extends javax.swing.JFrame {
         jLabelRua = new javax.swing.JLabel();
         jTextFieldRua = new javax.swing.JTextField();
         jLabelNo = new javax.swing.JLabel();
-        jTextFieldNo = new javax.swing.JTextField();
         jLabelComp = new javax.swing.JLabel();
         jTextFieldComp = new javax.swing.JTextField();
         jTextFieldBairro = new javax.swing.JTextField();
@@ -56,16 +60,19 @@ public class FrmClientes extends javax.swing.JFrame {
         jTextFieldCidade = new javax.swing.JTextField();
         jLabelUF = new javax.swing.JLabel();
         jComboBoxUF = new javax.swing.JComboBox<>();
+        jFormattedTextFieldNo = new javax.swing.JFormattedTextField();
+        jComboBoxEnderecos = new javax.swing.JComboBox<>();
+        jButtonSalvarEndereco = new javax.swing.JButton();
         jPanelConsultaClientes = new javax.swing.JPanel();
         jLabelNomeCon = new javax.swing.JLabel();
         jTextFieldNomeCon = new javax.swing.JTextField();
         jButtonPesquisarCon = new javax.swing.JButton();
         jScrollPaneCon = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButtonNovoCon = new javax.swing.JButton();
-        jButtonSalvarCon = new javax.swing.JButton();
-        jButtonEditarCon = new javax.swing.JButton();
-        jButtonExcluirCon = new javax.swing.JButton();
+        jButtonNovo = new javax.swing.JButton();
+        jButtonSalvar = new javax.swing.JButton();
+        jButtonEditar = new javax.swing.JButton();
+        jButtonExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -171,13 +178,6 @@ public class FrmClientes extends javax.swing.JFrame {
         jLabelNo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabelNo.setText("Nº:");
 
-        jTextFieldNo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextFieldNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNoActionPerformed(evt);
-            }
-        });
-
         jLabelComp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabelComp.setText("Comp.:");
 
@@ -214,6 +214,28 @@ public class FrmClientes extends javax.swing.JFrame {
         jComboBoxUF.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jComboBoxUF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
 
+        jFormattedTextFieldNo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        jFormattedTextFieldNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextFieldNoActionPerformed(evt);
+            }
+        });
+
+        jComboBoxEnderecos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxEnderecos.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jComboBoxEnderecosFocusGained(evt);
+            }
+        });
+
+        jButtonSalvarEndereco.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonSalvarEndereco.setText("Salvar endereço");
+        jButtonSalvarEndereco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarEnderecoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelDadosPessoaisLayout = new javax.swing.GroupLayout(jPanelDadosPessoais);
         jPanelDadosPessoais.setLayout(jPanelDadosPessoaisLayout);
         jPanelDadosPessoaisLayout.setHorizontalGroup(
@@ -241,7 +263,7 @@ public class FrmClientes extends javax.swing.JFrame {
                         .addComponent(jLabelTel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jFormattedTextFieldTel, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(289, Short.MAX_VALUE))
+                .addContainerGap(291, Short.MAX_VALUE))
             .addGroup(jPanelDadosPessoaisLayout.createSequentialGroup()
                 .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelDadosPessoaisLayout.createSequentialGroup()
@@ -251,18 +273,13 @@ public class FrmClientes extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabelNo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldNo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jFormattedTextFieldNo, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
                         .addComponent(jLabelComp)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldComp, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE))
+                        .addComponent(jTextFieldComp, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE))
                     .addGroup(jPanelDadosPessoaisLayout.createSequentialGroup()
                         .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelEndereco)
-                            .addGroup(jPanelDadosPessoaisLayout.createSequentialGroup()
-                                .addComponent(jLabelCEP)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jFormattedTextFieldCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelDadosPessoaisLayout.createSequentialGroup()
                                 .addComponent(jLabelBairro)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -270,11 +287,21 @@ public class FrmClientes extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelCidade)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelDadosPessoaisLayout.createSequentialGroup()
+                                .addComponent(jLabelEndereco)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelUF)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxUF, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jComboBoxEnderecos, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49)
+                                .addComponent(jButtonSalvarEndereco))
+                            .addGroup(jPanelDadosPessoaisLayout.createSequentialGroup()
+                                .addComponent(jLabelCEP)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jFormattedTextFieldCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelUF)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxUF, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(6, 6, 6))
         );
@@ -298,7 +325,10 @@ public class FrmClientes extends javax.swing.JFrame {
                     .addComponent(jLabelTel)
                     .addComponent(jFormattedTextFieldTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabelEndereco)
+                .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelEndereco)
+                    .addComponent(jComboBoxEnderecos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSalvarEndereco))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCEP)
@@ -308,9 +338,9 @@ public class FrmClientes extends javax.swing.JFrame {
                     .addComponent(jLabelRua)
                     .addComponent(jTextFieldRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelNo)
-                    .addComponent(jTextFieldNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelComp)
-                    .addComponent(jTextFieldComp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldComp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldNo, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -321,8 +351,12 @@ public class FrmClientes extends javax.swing.JFrame {
                         .addComponent(jTextFieldBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabelCidade)
                         .addComponent(jTextFieldCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
+
+        jPanelDadosPessoaisLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jFormattedTextFieldNo, jTextFieldRua});
+
+        jPanelDadosPessoaisLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonSalvarEndereco, jComboBoxEnderecos});
 
         jTabbedPaneClientes.addTab("Dados pessoais", jPanelDadosPessoais);
 
@@ -384,35 +418,35 @@ public class FrmClientes extends javax.swing.JFrame {
 
         jTabbedPaneClientes.addTab("Consulta de clientes", jPanelConsultaClientes);
 
-        jButtonNovoCon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonNovoCon.setText("NOVO");
-        jButtonNovoCon.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNovo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonNovo.setText("NOVO");
+        jButtonNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNovoConActionPerformed(evt);
+                jButtonNovoActionPerformed(evt);
             }
         });
 
-        jButtonSalvarCon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonSalvarCon.setText("SALVAR");
-        jButtonSalvarCon.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSalvar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonSalvar.setText("SALVAR");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSalvarConActionPerformed(evt);
+                jButtonSalvarActionPerformed(evt);
             }
         });
 
-        jButtonEditarCon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonEditarCon.setText("EDITAR");
-        jButtonEditarCon.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEditar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonEditar.setText("EDITAR");
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarConActionPerformed(evt);
+                jButtonEditarActionPerformed(evt);
             }
         });
 
-        jButtonExcluirCon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonExcluirCon.setText("EXCLUIR");
-        jButtonExcluirCon.addActionListener(new java.awt.event.ActionListener() {
+        jButtonExcluir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonExcluir.setText("EXCLUIR");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExcluirConActionPerformed(evt);
+                jButtonExcluirActionPerformed(evt);
             }
         });
 
@@ -427,17 +461,17 @@ public class FrmClientes extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(242, 242, 242)
-                .addComponent(jButtonNovoCon)
+                .addComponent(jButtonNovo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonSalvarCon)
+                .addComponent(jButtonSalvar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonEditarCon)
+                .addComponent(jButtonEditar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonExcluirCon)
+                .addComponent(jButtonExcluir)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonEditarCon, jButtonExcluirCon, jButtonNovoCon, jButtonSalvarCon});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonEditar, jButtonExcluir, jButtonNovo, jButtonSalvar});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -447,14 +481,14 @@ public class FrmClientes extends javax.swing.JFrame {
                 .addComponent(jTabbedPaneClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSalvarCon)
-                    .addComponent(jButtonNovoCon)
-                    .addComponent(jButtonEditarCon)
-                    .addComponent(jButtonExcluirCon))
+                    .addComponent(jButtonSalvar)
+                    .addComponent(jButtonNovo)
+                    .addComponent(jButtonEditar)
+                    .addComponent(jButtonExcluir))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonEditarCon, jButtonExcluirCon, jButtonNovoCon, jButtonSalvarCon});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonEditar, jButtonExcluir, jButtonNovo, jButtonSalvar});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -479,10 +513,6 @@ public class FrmClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldRuaActionPerformed
 
-    private void jTextFieldNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNoActionPerformed
-
     private void jTextFieldCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCompActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCompActionPerformed
@@ -499,21 +529,71 @@ public class FrmClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonPesquisarConActionPerformed
 
-    private void jButtonSalvarConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarConActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonSalvarConActionPerformed
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+//        try {
+//            Clientes cliente = new Clientes();
+//            cliente.setNome(jTextFieldNome.getText());
+//            cliente.setCpf(jFormattedTextFieldCPF.getText());
+//            cliente.setEmail(jTextFieldEmail.getText());
+//            cliente.setTelefone(jFormattedTextFieldTel.getText());
+//
+//            Enderecos endereco = new Enderecos();
+//            endereco.setCep(jFormattedTextFieldCEP.getText());
+//            endereco.setRua(jTextFieldRua.getText());
+//            endereco.setNumero(Integer.parseInt(jFormattedTextFieldNo.getText()));
+//            endereco.setComplemento(jTextFieldComp.getText());
+//            endereco.setBairro(jTextFieldBairro.getText());
+//            endereco.setCidade(jTextFieldCidade.getText());
+//            endereco.setUF(jComboBoxUF.getSelectedItem().toString());
+//
+//            cliente.setEndereco(endereco);
+//            
+//            
+//
+//        } catch (Exception e) {
+//        }
 
-    private void jButtonNovoConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoConActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonNovoConActionPerformed
 
-    private void jButtonEditarConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarConActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonEditarConActionPerformed
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
 
-    private void jButtonExcluirConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirConActionPerformed
+    private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonExcluirConActionPerformed
+    }//GEN-LAST:event_jButtonNovoActionPerformed
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonEditarActionPerformed
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void jFormattedTextFieldNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextFieldNoActionPerformed
+
+    private void jButtonSalvarEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarEnderecoActionPerformed
+        try {
+            Enderecos endereco = new Enderecos();
+            endereco.setCep(jFormattedTextFieldCEP.getText());
+            endereco.setRua(jTextFieldRua.getText());
+            endereco.setNumero(Integer.parseInt(jFormattedTextFieldNo.getText()));
+            endereco.setComplemento(jTextFieldComp.getText());
+            endereco.setBairro(jTextFieldBairro.getText());
+            endereco.setCidade(jTextFieldCidade.getText());
+            endereco.setUF(jComboBoxUF.getSelectedItem().toString());
+
+            EnderecosDAO enderecoDAO = new EnderecosDAO();
+            enderecoDAO.cadastrarEndereco(endereco);
+        } catch (Exception e) {
+        }
+
+
+    }//GEN-LAST:event_jButtonSalvarEnderecoActionPerformed
+
+    private void jComboBoxEnderecosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBoxEnderecosFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxEnderecosFocusGained
 
     /**
      * @param args the command line arguments
@@ -552,14 +632,17 @@ public class FrmClientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonEditarCon;
-    private javax.swing.JButton jButtonExcluirCon;
-    private javax.swing.JButton jButtonNovoCon;
+    private javax.swing.JButton jButtonEditar;
+    private javax.swing.JButton jButtonExcluir;
+    private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonPesquisarCon;
-    private javax.swing.JButton jButtonSalvarCon;
+    private javax.swing.JButton jButtonSalvar;
+    private javax.swing.JButton jButtonSalvarEndereco;
+    private javax.swing.JComboBox<String> jComboBoxEnderecos;
     private javax.swing.JComboBox<String> jComboBoxUF;
     private javax.swing.JFormattedTextField jFormattedTextFieldCEP;
     private javax.swing.JFormattedTextField jFormattedTextFieldCPF;
+    private javax.swing.JFormattedTextField jFormattedTextFieldNo;
     private javax.swing.JFormattedTextField jFormattedTextFieldTel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
@@ -587,7 +670,6 @@ public class FrmClientes extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldComp;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldId;
-    private javax.swing.JTextField jTextFieldNo;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldNomeCon;
     private javax.swing.JTextField jTextFieldRua;

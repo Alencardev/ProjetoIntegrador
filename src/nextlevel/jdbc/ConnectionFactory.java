@@ -17,7 +17,11 @@ public class ConnectionFactory {
     
    static public Connection getConnection(){
         try {
-            final String url = "jdbc:mysql://localhost:3306/NEXTLEVELBD?verifyServerCertificate=false&useSSL=true";
+            //URL para conexão com o BD
+            final String url = "jdbc:mysql://localhost:3306/NEXTLEVELBD"
+                    //Comandos extras para estabelecer uma conexão segura com o BD
+                    //Ficou curioso? Estude sobre SSL
+                    + "?verifyServerCertificate=false&useSSL=true";
             final String user = "teste";
             final String password = "987654";
             

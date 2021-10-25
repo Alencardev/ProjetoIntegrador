@@ -45,7 +45,7 @@ public class EnderecosDAO {
             comando.close();
             
             //Se chegar aqui o cadastro foi efetuado com sucesso
-            JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Endereço cadastrado com sucesso!");
             
             
         } catch (SQLException e) {
