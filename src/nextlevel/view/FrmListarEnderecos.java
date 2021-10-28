@@ -4,11 +4,36 @@
  */
 package nextlevel.view;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import nextlevel.dao.EnderecosDAO;
+import nextlevel.model.Enderecos;
+
 /**
  *
  * @author Leonardo Drews Montibeller at ldmontibeller@gmail.com
  */
 public class FrmListarEnderecos extends javax.swing.JFrame {
+    
+    public void tabelarEnderecos(){
+        EnderecosDAO dao = new EnderecosDAO();
+        List<Enderecos> lista = dao.listarEnderecos();
+        DefaultTableModel tabela = (DefaultTableModel)jTableEnderecos.getModel();
+        tabela.setNumRows(0);
+        for(Enderecos e: lista){
+            tabela.addRow(new Object[]{
+            e.getId(),
+            e.getCep(),
+            e.getRua(),
+            e.getNumero(),
+            e.getComplemento(),
+            e.getBairro(),
+            e.getCidade(),
+            e.getUF()
+            } );
+        }
+        
+    }
 
     /**
      * Creates new form FrmListarEnderecos
@@ -29,9 +54,14 @@ public class FrmListarEnderecos extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableEnderecos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 204));
 
@@ -57,7 +87,7 @@ public class FrmListarEnderecos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableEnderecos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -65,7 +95,7 @@ public class FrmListarEnderecos extends javax.swing.JFrame {
                 "Id", "CEP", "Rua", "Número", "Complemento", "Bairro", "Cidade", "UF"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableEnderecos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,6 +118,10 @@ public class FrmListarEnderecos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        tabelarEnderecos();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -128,6 +162,6 @@ public class FrmListarEnderecos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableEnderecos;
     // End of variables declaration//GEN-END:variables
 }
