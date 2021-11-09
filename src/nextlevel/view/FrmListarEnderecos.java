@@ -16,20 +16,35 @@ import nextlevel.model.Enderecos;
 public class FrmListarEnderecos extends javax.swing.JFrame {
     
     public void tabelarEnderecos(){
+        //1º passo: criar um objeto DAO para podermos utilizar seus métodos
         EnderecosDAO dao = new EnderecosDAO();
+        
+        //2º passo: criar uma lista de endereços através do método listar 
+        //enderecos do DAO
         List<Enderecos> lista = dao.listarEnderecos();
+        
+        //3º passo: criar uma tabela do modelo padrão. Para isso pegamos o modelo
+        //do componente jTable da tela através do método getModel() e convertemos
+        //ele através de um casting para o modelo de tabela padrão.
         DefaultTableModel tabela = (DefaultTableModel)jTableEnderecos.getModel();
+        
+        //4º passo: setamos o número de colunas de nossa tabela em zero para limpar 
+        // e garantir que não existem nenhum dado pré existente.
         tabela.setNumRows(0);
-        for(Enderecos e: lista){
-            tabela.addRow(new Object[]{
-            e.getId(),
-            e.getCep(),
-            e.getRua(),
-            e.getNumero(),
-            e.getComplemento(),
-            e.getBairro(),
-            e.getCidade(),
-            e.getUF()
+        
+        //5º passo: precisamos colocar os itens da lista na tabela. Para cada objeto
+        //do tipo Endereco na lista, nós adicionamos um novo objeto com os atributos
+        //do objeto endereco nos seus campos separados por vírgula.
+        for(Enderecos endereco: lista){ //este é um exemplo de uso do for-each
+            tabela.addRow(new Object[]{ //este Object é um vetor/array
+            endereco.getId(),
+            endereco.getCep(),
+            endereco.getRua(),
+            endereco.getNumero(),
+            endereco.getComplemento(),
+            endereco.getBairro(),
+            endereco.getCidade(),
+            endereco.getUF()
             } );
         }
         
