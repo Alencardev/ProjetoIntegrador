@@ -4,6 +4,7 @@
  */
 package nextlevel.dao;
 
+import nextlevel.model.Clientes;
 import nextlevel.model.Enderecos;
 
 /**
@@ -12,23 +13,28 @@ import nextlevel.model.Enderecos;
  */
 public class TesteDAO {
     public static void main(String[] args) {
-//         TESTE DO CADASTRAR
-//        Enderecos enderecoTeste = new Enderecos();
-//        
-//        enderecoTeste.setCep("88888-88");
-//        enderecoTeste.setRua("RUA GRANDE");
-//        enderecoTeste.setNumero(888);
-//        enderecoTeste.setComplemento("D");
-//        enderecoTeste.setBairro("CENTRO");
-//        enderecoTeste.setCidade("CHAPECO");
-//        enderecoTeste.setUF("SC");
-//        
-//        EnderecosDAO dao = new EnderecosDAO();
-//        dao.cadastrarEndereco(enderecoTeste);
+//      TESTE DO CADASTRAR ENDERECO
+        Clientes clienteTeste = new Clientes();
+        clienteTeste.setCpf("123.456.789-50 ");
+        clienteTeste.setEmail("email@email.com");
+        //clienteTeste.setId("1");
+        
+        Enderecos enderecoTeste = new Enderecos();
+        
+        enderecoTeste.setCep("88888-88");
+        enderecoTeste.setRua("RUA GRANDE");
+        enderecoTeste.setNumero(888);
+        enderecoTeste.setComplemento("D");
+        enderecoTeste.setBairro("CENTRO");
+        enderecoTeste.setCidade("CHAPECO");
+        enderecoTeste.setUF("SC");
+        
+        EnderecosDAO dao = new EnderecosDAO();
+        dao.cadastrarEndereco(enderecoTeste);
 
-//        TESTE DO LISTAR
-          EnderecosDAO dao = new EnderecosDAO();
-          dao.listarEnderecos();
+//        TESTE DO LISTAR ENDERECO
+//          EnderecosDAO dao = new EnderecosDAO();
+//          dao.listarEnderecos();
 
     }
    

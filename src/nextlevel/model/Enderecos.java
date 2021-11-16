@@ -19,6 +19,8 @@ public class Enderecos {
     private String bairro;
     private String cidade;
     private String uf;
+    //Quando se tem uma chave estrangeira (Foreign Key, FK)
+    private Clientes cliente;
     
     //GETTERS E SETTERS
     public int getId() {
@@ -84,5 +86,13 @@ public class Enderecos {
     public void setUF(String uf) {
         this.uf = uf;
     }
-    
+
+    public Clientes getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Clientes cliente) {
+        this.cliente = cliente;
+    }
+     
 }

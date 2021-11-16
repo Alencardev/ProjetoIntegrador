@@ -30,8 +30,8 @@ public class EnderecosDAO {
     public void cadastrarEndereco(Enderecos obj) {
         try {
             //2º passo: criar uma string de comando SQL
-            String sql = "insert into tb_enderecos(cep, rua, numero, complemento, bairro, cidade, uf)"
-                    + "values (?,?,?,?,?,?,?)";
+            String sql = "insert into tb_enderecos(cep, rua, numero, complemento, bairro, cidade, uf, id_cliente)"
+                    + "values (?,?,?,?,?,?,?,?)";
 
             //3º passo: preparar o comando SQL para o driver
             PreparedStatement comando = conexao.prepareStatement(sql);
@@ -42,6 +42,7 @@ public class EnderecosDAO {
             comando.setString(5, obj.getBairro());
             comando.setString(6, obj.getCidade());
             comando.setString(7, obj.getUF());
+            comando.setInt(8, obj.getCliente().getId());
 
             //4º passo: executar o comando sql e fechar a conexão
             comando.execute();
@@ -89,6 +90,7 @@ public class EnderecosDAO {
                 obj.setBairro(rs.getString("bairro"));
                 obj.setCidade(rs.getString("cidade"));
                 obj.setUF(rs.getString("uf"));
+                
                 
                 //Após todos os atributos serem inserido dentro do objeto
                 //preciso adicionar esse objeto na minha lista de enderecos
