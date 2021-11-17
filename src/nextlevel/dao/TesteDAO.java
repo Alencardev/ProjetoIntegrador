@@ -13,24 +13,31 @@ import nextlevel.model.Enderecos;
  */
 public class TesteDAO {
     public static void main(String[] args) {
-//      TESTE DO CADASTRAR ENDERECO
+//      TESTE DO CADASTRAR CLIENTE
         Clientes clienteTeste = new Clientes();
         clienteTeste.setCpf("123.456.789-50 ");
         clienteTeste.setEmail("email@email.com");
-        //clienteTeste.setId("1");
+        clienteTeste.setTelefone("(49) 9 9999-9999");
         
-        Enderecos enderecoTeste = new Enderecos();
+        System.out.println(clienteTeste.getId());
         
-        enderecoTeste.setCep("88888-88");
-        enderecoTeste.setRua("RUA GRANDE");
-        enderecoTeste.setNumero(888);
-        enderecoTeste.setComplemento("D");
-        enderecoTeste.setBairro("CENTRO");
-        enderecoTeste.setCidade("CHAPECO");
-        enderecoTeste.setUF("SC");
+        ClientesDAO dao = new ClientesDAO();
+        dao.cadastrarCliente(clienteTeste);
         
-        EnderecosDAO dao = new EnderecosDAO();
-        dao.cadastrarEndereco(enderecoTeste);
+        System.out.println(clienteTeste.getId());
+        
+//        Enderecos enderecoTeste = new Enderecos();
+//        
+//        enderecoTeste.setCep("88888-88");
+//        enderecoTeste.setRua("RUA GRANDE");
+//        enderecoTeste.setNumero(888);
+//        enderecoTeste.setComplemento("D");
+//        enderecoTeste.setBairro("CENTRO");
+//        enderecoTeste.setCidade("CHAPECO");
+//        enderecoTeste.setUF("SC");
+//        
+//        EnderecosDAO dao = new EnderecosDAO();
+//        dao.cadastrarEndereco(enderecoTeste);
 
 //        TESTE DO LISTAR ENDERECO
 //          EnderecosDAO dao = new EnderecosDAO();
