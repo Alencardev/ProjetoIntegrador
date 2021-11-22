@@ -15,6 +15,7 @@ public class TesteDAO {
     public static void main(String[] args) {
 //      TESTE DO CADASTRAR CLIENTE
         Clientes clienteTeste = new Clientes();
+        clienteTeste.setNome("Manuel da Silva");
         clienteTeste.setCpf("123.456.789-50 ");
         clienteTeste.setEmail("email@email.com");
         clienteTeste.setTelefone("(49) 9 9999-9999");
