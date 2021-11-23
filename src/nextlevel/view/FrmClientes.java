@@ -440,9 +440,14 @@ public class FrmClientes extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Identificador", "Nome", "Email", "CPF", "Telefone"
+                "Identificador", "Nome", "CPF", "Email", "Telefone"
             }
         ));
+        jTableClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableClientesMouseClicked(evt);
+            }
+        });
         jScrollPaneCon.setViewportView(jTableClientes);
 
         javax.swing.GroupLayout jPanelConsultaClientesLayout = new javax.swing.GroupLayout(jPanelConsultaClientes);
@@ -637,6 +642,18 @@ public class FrmClientes extends javax.swing.JFrame {
                     }
 
     }//GEN-LAST:event_jButtonNovoCadastroActionPerformed
+
+    private void jTableClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableClientesMouseClicked
+        //Cada coluna é um número que vai de zero a 4 (id,nome,cpf,email,tel)
+        jTextFieldId.setText(jTableClientes.getValueAt(jTableClientes.getSelectedRow(), 0).toString());
+        jTextFieldNome.setText(jTableClientes.getValueAt(jTableClientes.getSelectedRow(), 1).toString());
+        jFormattedTextFieldCPF.setText(jTableClientes.getValueAt(jTableClientes.getSelectedRow(), 2).toString());
+        jTextFieldEmail.setText(jTableClientes.getValueAt(jTableClientes.getSelectedRow(), 3).toString());
+        jFormattedTextFieldTel.setText(jTableClientes.getValueAt(jTableClientes.getSelectedRow(), 4).toString());
+        
+        //Mudar a tela para a aba principal (A aba com índice 0)
+        jTabbedPaneClientes.setSelectedIndex(0); 
+    }//GEN-LAST:event_jTableClientesMouseClicked
 
     /**
      * @param args the command line arguments

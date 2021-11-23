@@ -67,7 +67,7 @@ public class ClientesDAO {
         }
     }
     
-     public List<Clientes> listarClientes() {
+    public List<Clientes> listarClientes() {
         try {
             //1º passo: criar uma lista para armazenar os clientes
             List<Clientes> lista = new ArrayList<>();
@@ -111,6 +111,8 @@ public class ClientesDAO {
             return null;
         }
     }
+     
+   
 }
 
    

@@ -687,8 +687,8 @@
                       <Table columnCount="5" rowCount="0">
                         <Column editable="true" title="Identificador" type="java.lang.Object"/>
                         <Column editable="true" title="Nome" type="java.lang.Object"/>
-                        <Column editable="true" title="Email" type="java.lang.Object"/>
                         <Column editable="true" title="CPF" type="java.lang.Object"/>
+                        <Column editable="true" title="Email" type="java.lang.Object"/>
                         <Column editable="true" title="Telefone" type="java.lang.Object"/>
                       </Table>
                     </Property>
@@ -725,6 +725,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableClientesMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
