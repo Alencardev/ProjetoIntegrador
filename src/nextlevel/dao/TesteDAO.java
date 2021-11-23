@@ -4,6 +4,7 @@
  */
 package nextlevel.dao;
 
+import javax.swing.JOptionPane;
 import nextlevel.model.Clientes;
 import nextlevel.model.Enderecos;
 
@@ -14,19 +15,19 @@ import nextlevel.model.Enderecos;
 public class TesteDAO {
     public static void main(String[] args) {
 //      TESTE DO CADASTRAR CLIENTE
-        Clientes clienteTeste = new Clientes();
-        clienteTeste.setNome("Manuel da Silva");
-        clienteTeste.setCpf("123.456.789-50 ");
-        clienteTeste.setEmail("email@email.com");
-        clienteTeste.setTelefone("(49) 9 9999-9999");
-        
-        System.out.println(clienteTeste.getId());
-        
-        ClientesDAO dao = new ClientesDAO();
-        dao.cadastrarCliente(clienteTeste);
-        
-        System.out.println(clienteTeste.getId());
-        
+//        Clientes clienteTeste = new Clientes();
+//        clienteTeste.setNome("Manuel da Silva");
+//        clienteTeste.setCpf("123.456.789-50 ");
+//        clienteTeste.setEmail("email@email.com");
+//        clienteTeste.setTelefone("(49) 9 9999-9999");
+//        
+//        System.out.println(clienteTeste.getId());
+//        
+//        ClientesDAO dao = new ClientesDAO();
+//        dao.cadastrarCliente(clienteTeste);
+//        
+//        System.out.println(clienteTeste.getId());
+//        
 //        Enderecos enderecoTeste = new Enderecos();
 //        
 //        enderecoTeste.setCep("88888-88");
@@ -43,7 +44,10 @@ public class TesteDAO {
 //        TESTE DO LISTAR ENDERECO
 //          EnderecosDAO dao = new EnderecosDAO();
 //          dao.listarEnderecos();
-
+    
+//          TESTE DO OPTION PANE
+        int variavel = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o cliente?", "CONFIRMAÇÃO DE EXCLUSÃO", JOptionPane.OK_CANCEL_OPTION);
+        System.out.println(variavel);
     }
    
     

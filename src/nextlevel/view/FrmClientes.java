@@ -539,40 +539,47 @@ public class FrmClientes extends javax.swing.JFrame {
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         //Se o campo pesquisar estiver em branco, lista todos os clientes
-        if(jTextFieldPesquisa.getText().isBlank()){
-         //1º passo: criar um objeto DAO para podermos utilizar seus métodos
-        ClientesDAO dao = new ClientesDAO();
-        
-        //2º passo: criar uma lista de endereços através do método listar 
-        //enderecos do DAO
-        List<Clientes> lista = dao.listarClientes();
-        
-        //3º passo: criar uma tabela do modelo padrão. Para isso pegamos o modelo
-        //do componente jTable da tela através do método getModel() e convertemos
-        //ele através de um casting para o modelo de tabela padrão.
-        DefaultTableModel tabela = (DefaultTableModel)jTableClientes.getModel();
-        
-        //4º passo: setamos o número de colunas de nossa tabela em zero para limpar 
-        // e garantir que não existem nenhum dado pré existente.
-        tabela.setNumRows(0);
-        
-        //5º passo: precisamos colocar os itens da lista na tabela. Para cada objeto
-        //do tipo Endereco na lista, nós adicionamos um novo objeto com os atributos
-        //do objeto endereco nos seus campos separados por vírgula.
-        for(Clientes cliente: lista){ //este é um exemplo de uso do for-each
-            tabela.addRow(new Object[]{ //este Object é um vetor/array
-            cliente.getId(),
-            cliente.getNome(),
-            cliente.getCpf(),
-            cliente.getEmail(),
-            cliente.getTelefone(),
-            } );
-        }
+        if (jTextFieldPesquisa.getText().isBlank()) {
+            //1º passo: criar um objeto DAO para podermos utilizar seus métodos
+            ClientesDAO dao = new ClientesDAO();
+
+            //2º passo: criar uma lista de endereços através do método listar 
+            //enderecos do DAO
+            List<Clientes> lista = dao.listarClientes();
+
+            //3º passo: criar uma tabela do modelo padrão. Para isso pegamos o modelo
+            //do componente jTable da tela através do método getModel() e convertemos
+            //ele através de um casting para o modelo de tabela padrão.
+            DefaultTableModel tabela = (DefaultTableModel) jTableClientes.getModel();
+
+            //4º passo: setamos o número de colunas de nossa tabela em zero para limpar 
+            // e garantir que não existem nenhum dado pré existente.
+            tabela.setNumRows(0);
+
+            //5º passo: precisamos colocar os itens da lista na tabela. Para cada objeto
+            //do tipo Endereco na lista, nós adicionamos um novo objeto com os atributos
+            //do objeto endereco nos seus campos separados por vírgula.
+            for (Clientes cliente : lista) { //este é um exemplo de uso do for-each
+                tabela.addRow(new Object[]{ //este Object é um vetor/array
+                    cliente.getId(),
+                    cliente.getNome(),
+                    cliente.getCpf(),
+                    cliente.getEmail(),
+                    cliente.getTelefone(),});
+            }
         }
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-        // TODO add your handling code here:
+        Clientes cliente = new Clientes();
+        cliente.setNome(jTextFieldNome.getText());
+        cliente.setCpf(jFormattedTextFieldCPF.getText());
+        cliente.setEmail(jTextFieldEmail.getText());
+        cliente.setTelefone(jFormattedTextFieldTel.getText());
+        cliente.setId(Integer.parseInt(jTextFieldId.getText()));
+
+        ClientesDAO dao = new ClientesDAO();
+        dao.atualizarCliente(cliente);
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
@@ -611,35 +618,35 @@ public class FrmClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonListarEnderecosActionPerformed
 
     private void jButtonNovoCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoCadastroActionPerformed
-                try {
-                        Clientes cliente = new Clientes();
-                        cliente.setNome(jTextFieldNome.getText());
-                        cliente.setCpf(jFormattedTextFieldCPF.getText());
-                        cliente.setEmail(jTextFieldEmail.getText());
-                        cliente.setTelefone(jFormattedTextFieldTel.getText());
-                        
-                        ClientesDAO dao = new ClientesDAO();
-                        dao.cadastrarCliente(cliente);
-                        
-                        //Essa parte só pode executar se o usuário não deixou o campo Rua em branco
-                        if(!jTextFieldRua.getText().isBlank()){
-                            Enderecos endereco = new Enderecos();
-                            endereco.setCep(jFormattedTextFieldCEP.getText());
-                            endereco.setRua(jTextFieldRua.getText());
-                            endereco.setNumero(Integer.parseInt(jFormattedTextFieldNo.getText()));
-                            endereco.setComplemento(jTextFieldComp.getText());
-                            endereco.setBairro(jTextFieldBairro.getText());
-                            endereco.setCidade(jTextFieldCidade.getText());
-                            endereco.setUF(jComboBoxUF.getSelectedItem().toString());
-                            //Pegar o endereço que estamos cadastrando e salvar o
-                            //Id do cliente como chave estrangeira
-                            endereco.setCliente(cliente);
+        try {
+            Clientes cliente = new Clientes();
+            cliente.setNome(jTextFieldNome.getText());
+            cliente.setCpf(jFormattedTextFieldCPF.getText());
+            cliente.setEmail(jTextFieldEmail.getText());
+            cliente.setTelefone(jFormattedTextFieldTel.getText());
 
-                            EnderecosDAO daoEnd = new EnderecosDAO();
-                            daoEnd.cadastrarEndereco(endereco);
-                        } 
-                    } catch (Exception e) {
-                    }
+            ClientesDAO dao = new ClientesDAO();
+            dao.cadastrarCliente(cliente);
+
+            //Essa parte só pode executar se o usuário não deixou o campo Rua em branco
+            if (!jTextFieldRua.getText().isBlank()) {
+                Enderecos endereco = new Enderecos();
+                endereco.setCep(jFormattedTextFieldCEP.getText());
+                endereco.setRua(jTextFieldRua.getText());
+                endereco.setNumero(Integer.parseInt(jFormattedTextFieldNo.getText()));
+                endereco.setComplemento(jTextFieldComp.getText());
+                endereco.setBairro(jTextFieldBairro.getText());
+                endereco.setCidade(jTextFieldCidade.getText());
+                endereco.setUF(jComboBoxUF.getSelectedItem().toString());
+                //Pegar o endereço que estamos cadastrando e salvar o
+                //Id do cliente como chave estrangeira
+                endereco.setCliente(cliente);
+
+                EnderecosDAO daoEnd = new EnderecosDAO();
+                daoEnd.cadastrarEndereco(endereco);
+            }
+        } catch (Exception e) {
+        }
 
     }//GEN-LAST:event_jButtonNovoCadastroActionPerformed
 
@@ -650,9 +657,9 @@ public class FrmClientes extends javax.swing.JFrame {
         jFormattedTextFieldCPF.setText(jTableClientes.getValueAt(jTableClientes.getSelectedRow(), 2).toString());
         jTextFieldEmail.setText(jTableClientes.getValueAt(jTableClientes.getSelectedRow(), 3).toString());
         jFormattedTextFieldTel.setText(jTableClientes.getValueAt(jTableClientes.getSelectedRow(), 4).toString());
-        
+
         //Mudar a tela para a aba principal (A aba com índice 0)
-        jTabbedPaneClientes.setSelectedIndex(0); 
+        jTabbedPaneClientes.setSelectedIndex(0);
     }//GEN-LAST:event_jTableClientesMouseClicked
 
     /**
