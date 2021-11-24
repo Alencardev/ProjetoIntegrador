@@ -566,7 +566,35 @@ public class FrmClientes extends javax.swing.JFrame {
                     cliente.getCpf(),
                     cliente.getEmail(),
                     cliente.getTelefone(),});
-            }
+            } 
+        } else {
+            //1º passo: criar um objeto DAO para podermos utilizar seus métodos
+            ClientesDAO dao = new ClientesDAO();
+
+            //2º passo: criar uma lista de endereços através do método listar 
+            //enderecos do DAO
+            List<Clientes> lista = dao.buscarClientes(jTextFieldPesquisa.getText());
+
+            //3º passo: criar uma tabela do modelo padrão. Para isso pegamos o modelo
+            //do componente jTable da tela através do método getModel() e convertemos
+            //ele através de um casting para o modelo de tabela padrão.
+            DefaultTableModel tabela = (DefaultTableModel) jTableClientes.getModel();
+
+            //4º passo: setamos o número de colunas de nossa tabela em zero para limpar 
+            // e garantir que não existem nenhum dado pré existente.
+            tabela.setNumRows(0);
+
+            //5º passo: precisamos colocar os itens da lista na tabela. Para cada objeto
+            //do tipo Endereco na lista, nós adicionamos um novo objeto com os atributos
+            //do objeto endereco nos seus campos separados por vírgula.
+            for (Clientes cliente : lista) { //este é um exemplo de uso do for-each
+                tabela.addRow(new Object[]{ //este Object é um vetor/array
+                    cliente.getId(),
+                    cliente.getNome(),
+                    cliente.getCpf(),
+                    cliente.getEmail(),
+                    cliente.getTelefone(),});
+            } 
         }
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
@@ -583,7 +611,10 @@ public class FrmClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-        // TODO add your handling code here:
+        Clientes cliente = new Clientes();
+        cliente.setId(Integer.parseInt(jTextFieldId.getText()));
+        ClientesDAO dao = new ClientesDAO();
+        dao.deletarCliente(cliente);
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jFormattedTextFieldNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldNoActionPerformed
