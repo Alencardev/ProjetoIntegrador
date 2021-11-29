@@ -8,6 +8,7 @@ package nextlevel.jdbc;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.PreparedStatement;
 
 /**
  *
@@ -22,8 +23,8 @@ public class ConnectionFactory {
                     //Comandos extras para estabelecer uma conexão segura com o BD
                     //Ficou curioso? Estude sobre SSL
                     + "?verifyServerCertificate=false&useSSL=true";
-            final String user = "teste";
-            final String password = "987654";
+            final String user = "alencardev";
+            final String password = "1995";
             
             return DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
